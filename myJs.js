@@ -71,8 +71,6 @@ function update() {
         animationRepeat = requestAnimationFrame(update);
 
     }
-
-    f
 }
 
 function waitingOnPaddle() {
@@ -94,11 +92,26 @@ function ballMove() {
         ballDir[1] *= -1;
     }
 
+    if (isCollide(ball, paddle)) {
+        // collision
+        console.log('HIT')
+    }
+
     x += ballDir[0];
     y += ballDir[1];
 
 
     ball.style.top = y + 'px';
     ball.style.left = x + 'px';
+
+}
+
+function isCollide(a, b) {
+
+    var aRect = a.getBoundingClientRect();
+    var bRect = b.getBoundingClientRect();
+    // console.log("a:", aRect);
+    // console.log("b:", bRect);
+    return (!(aRect.bottom < bRect.top || aRect.top > bRect.bottom || aRect.right < bRect.left || aRect.left > bRect.right));
 
 }
